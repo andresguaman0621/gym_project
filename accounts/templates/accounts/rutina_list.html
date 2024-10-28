@@ -1,11 +1,12 @@
-{% extends "accounts/base.html" %} {% block content %}
-<h2>Rutinas de Entrenamiento</h2>
-<a href="{% url 'rutina_create' %}">Crear Nueva Rutina</a>
+{% extends 'accounts/base.html' %} {% block content %}
+<h2>Rutinas</h2>
+<a href="{% url 'create_rutina' %}">Add New Rutina</a>
 <ul>
   {% for rutina in rutinas %}
   <li>
-    {{ rutina }} - <a href="{% url 'rutina_update' rutina.pk %}">Editar</a> |
-    <a href="{% url 'rutina_delete' rutina.pk %}">Eliminar</a>
+    {{ rutina }} -
+    <a href="{% url 'update_rutina' rutina.pk %}">Edit</a> |
+    <a href="{% url 'delete_rutina' rutina.pk %}">Delete</a>
   </li>
   {% endfor %}
 </ul>

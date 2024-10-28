@@ -1,7 +1,7 @@
 <!-- templates/accounts/planalimentacion_list.html -->
 {% extends "accounts/base.html" %} {% block content %}
 <h2>Planes de Alimentación</h2>
-<a href="{% url 'planalimentacion_create' %}">Create New Plan</a>
+<a href="{% url 'create_planalimentacion' %}">Create New Plan</a>
 <table>
   <thead>
     <tr>
@@ -18,8 +18,8 @@
       <td>{{ plan.fechaInicio }}</td>
       <td>{{ plan.fechaFin }}</td>
       <td>
-        <a href="{% url 'planalimentacion_update' plan.id %}">Edit</a> |
-        <a href="{% url 'planalimentacion_delete' plan.id %}">Delete</a>
+        <a href="{% url 'update_planalimentacion' plan.id %}">Edit</a> |
+        <a href="{% url 'delete_planalimentacion' plan.id %}">Delete</a>
       </td>
     </tr>
     {% endfor %}

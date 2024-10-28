@@ -1,7 +1,7 @@
 <!-- templates/accounts/alimento_list.html -->
 {% extends "accounts/base.html" %} {% block content %}
 <h2>Alimentos</h2>
-<a href="{% url 'alimento_create' %}">Create New Alimento</a>
+<a href="{% url 'create_alimento' %}">Create New Alimento</a>
 <table>
   <thead>
     <tr>
@@ -20,8 +20,8 @@
       <td>{{ alimento.cantidad }}</td>
       <td>{{ alimento.unidad }}</td>
       <td>
-        <a href="{% url 'alimento_update' alimento.id %}">Edit</a> |
-        <a href="{% url 'alimento_delete' alimento.id %}">Delete</a>
+        <a href="{% url 'update_alimento' alimento.id %}">Edit</a> |
+        <a href="{% url 'delete_alimento' alimento.id %}">Delete</a>
       </td>
     </tr>
     {% endfor %}

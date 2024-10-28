@@ -10,4 +10,10 @@
   </li>
   <li><a href="{% url 'comida_list' %}">Manage Comidas</a></li>
   <li><a href="{% url 'alimento_list' %}">Manage Alimentos</a></li>
+
+  <!-- Agregar el botón de logout -->
+  <form action="{% url 'logout' %}" method="post" style="display: inline">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
 </ul>

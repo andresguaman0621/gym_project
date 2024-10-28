@@ -1,8 +1,9 @@
-{% extends "accounts/base.html" %} {% block content %}
-<h2>¿Está seguro de que desea eliminar esta rutina?</h2>
+<!-- templates/accounts/rutina_confirm_delete.html -->
+{% extends 'accounts/base.html' %} {% block content %}
+<h2>Are you sure you want to delete this rutina?</h2>
 <form method="post">
   {% csrf_token %}
-  <button type="submit">Confirmar</button>
-  <a href="{% url 'rutina_list' %}">Cancelar</a>
+  <button type="submit">Confirm</button>
+  <a href="{% url 'rutina_list' %}">Cancel</a>
 </form>
 {% endblock %}

@@ -45,17 +45,17 @@ class SecretKeyForm(forms.Form):
 class RutinaEntrenamientoForm(forms.ModelForm):
     class Meta:
         model = RutinaEntrenamiento
-        fields = ['fechaInicio', 'fechaFin']  
+        fields = ['cliente', 'fecha_inicio', 'fecha_fin']
 
 class EjercicioForm(forms.ModelForm):
     class Meta:
         model = Ejercicio
-        fields = ['rutina', 'nombre', 'series', 'repeticiones', 'pesoRecomendado']
+        fields = ['rutina', 'nombre', 'series', 'repeticiones', 'peso_recomendado']
 
 class PlanAlimentacionForm(forms.ModelForm):
     class Meta:
         model = PlanAlimentacion
-        fields = ['fechaInicio', 'fechaFin']
+        fields = ['cliente', 'fecha_inicio', 'fecha_fin']
 
 class ComidaForm(forms.ModelForm):
     class Meta:
@@ -66,3 +66,4 @@ class AlimentoForm(forms.ModelForm):
     class Meta:
         model = Alimento
         fields = ['comida', 'nombre', 'cantidad', 'unidad']
+

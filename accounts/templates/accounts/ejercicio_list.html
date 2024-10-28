@@ -1,7 +1,7 @@
 <!-- templates/accounts/ejercicio_list.html -->
 {% extends "accounts/base.html" %} {% block content %}
 <h2>Ejercicios</h2>
-<a href="{% url 'ejercicio_create' %}">Create New Ejercicio</a>
+<a href="{% url 'create_ejercicio' %}">Create New Ejercicio</a>
 <table>
   <thead>
     <tr>
@@ -22,8 +22,8 @@
       <td>{{ ejercicio.repeticiones }}</td>
       <td>{{ ejercicio.pesoRecomendado }}</td>
       <td>
-        <a href="{% url 'ejercicio_update' ejercicio.id %}">Edit</a> |
-        <a href="{% url 'ejercicio_delete' ejercicio.id %}">Delete</a>
+        <a href="{% url 'update_ejercicio' ejercicio.id %}">Edit</a> |
+        <a href="{% url 'delete_ejercicio' ejercicio.id %}">Delete</a>
       </td>
     </tr>
     {% endfor %}

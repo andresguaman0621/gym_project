@@ -1,10 +1,9 @@
-<!-- accounts/templates/accounts/rutina_form.html -->
-{% extends "accounts/base.html" %} {% block content %}
-<h2>
-  {% if form.instance.pk %}Actualizar Rutina{% else %}Crear Rutina{% endif %}
-</h2>
+<!-- templates/accounts/rutina_form.html -->
+{% extends 'accounts/base.html' %} {% block content %}
+<h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Rutina</h2>
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Guardar</button>
+  <button type="submit">Save</button>
 </form>
+<a href="{% url 'rutina_list' %}">Back to Rutina List</a>
 {% endblock %}

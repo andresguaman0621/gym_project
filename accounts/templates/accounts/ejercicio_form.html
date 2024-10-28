@@ -1,13 +1,9 @@
 <!-- templates/accounts/ejercicio_form.html -->
-{% extends "accounts/base.html" %} {% block content %}
-<h2>
-  {% if form.instance.pk %}Update Ejercicio{% else %}Create Ejercicio{% endif %}
-</h2>
+{% extends 'accounts/base.html' %} {% block content %}
+<h2>Create Ejercicio</h2>
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit">
-    {% if form.instance.pk %}Update{% else %}Create{% endif %}
-  </button>
+  <button type="submit">Save</button>
 </form>
-<a href="{% url 'ejercicio_list' %}">Back to Ejercicios</a>
+<a href="{% url 'ejercicio_list' %}">Back to Ejercicio List</a>
 {% endblock %}

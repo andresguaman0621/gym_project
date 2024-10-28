@@ -1,42 +1,46 @@
+# accounts/models.py
+
 from django.db import models
 
 class RutinaEntrenamiento(models.Model):
-    fechaInicio = models.DateField()
-    fechaFin = models.DateField()
+    cliente = models.ForeignKey('auth.User', on_delete=models.CASCADE)  # Assuming cliente is a user
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
 
     def __str__(self):
-        return f"Rutina del {self.fechaInicio} al {self.fechaFin}"
+        return f'Rutina for {self.cliente} from {self.fecha_inicio} to {self.fecha_fin}'
 
 class Ejercicio(models.Model):
-    rutina = models.ForeignKey(RutinaEntrenamiento, related_name="ejercicios", on_delete=models.CASCADE)
+    rutina = models.ForeignKey(RutinaEntrenamiento, on_delete=models.CASCADE, related_name='ejercicios')
     nombre = models.CharField(max_length=100)
     series = models.IntegerField()
     repeticiones = models.IntegerField()
-    pesoRecomendado = models.FloatField()
+    peso_recomendado = models.FloatField()
 
     def __str__(self):
         return str(self.nombre)
 
 class PlanAlimentacion(models.Model):
-    fechaInicio = models.DateField()
-    fechaFin = models.DateField()
+    cliente = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
 
-    def __str__(self):
-        return f"Plan del {self.fechaInicio} al {self.fechaFin}"
+    def __str__(self): 
+        return f'Plan Alimentacion for {self.cliente} from {self.fecha_inicio} to {self.fecha_fin}'
 
 class Comida(models.Model):
-    plan = models.ForeignKey(PlanAlimentacion, related_name="comidas", on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=50)  # E.g., desayuno, almuerzo
+    plan = models.ForeignKey(PlanAlimentacion, on_delete=models.CASCADE, related_name='comidas')
+    tipo = models.CharField(max_length=50)
     hora = models.TimeField()
 
     def __str__(self):
-        return f"{self.tipo} a las {self.hora}"
+        return f'{self.tipo} at {self.hora}'
 
 class Alimento(models.Model):
-    comida = models.ForeignKey(Comida, related_name="alimentos", on_delete=models.CASCADE)
+    comida = models.ForeignKey(Comida, on_delete=models.CASCADE, related_name='alimentos')
     nombre = models.CharField(max_length=100)
     cantidad = models.FloatField()
-    unidad = models.CharField(max_length=20)  # E.g., gramos, mililitros
+    unidad = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.cantidad} {self.unidad} de {self.nombre}"
+        return f'{self.nombre} ({self.cantidad} {self.unidad})'
