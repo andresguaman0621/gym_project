@@ -1,0 +1,14 @@
+<!-- templates/accounts/planalimentacion_form.html -->
+{% extends "accounts/base.html" %} {% block content %}
+<h2>
+  {% if form.instance.pk %}Update Plan de Alimentación{% else %}Create Plan de
+  Alimentación{% endif %}
+</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">
+    {% if form.instance.pk %}Update{% else %}Create{% endif %}
+  </button>
+</form>
+<a href="{% url 'planalimentacion_list' %}">Back to Planes de Alimentación</a>
+{% endblock %}

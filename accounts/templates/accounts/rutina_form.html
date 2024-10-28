@@ -1,0 +1,10 @@
+<!-- accounts/templates/accounts/rutina_form.html -->
+{% extends "accounts/base.html" %} {% block content %}
+<h2>
+  {% if form.instance.pk %}Actualizar Rutina{% else %}Crear Rutina{% endif %}
+</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Guardar</button>
+</form>
+{% endblock %}

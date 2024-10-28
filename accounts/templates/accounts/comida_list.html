@@ -1,0 +1,28 @@
+<!-- templates/accounts/comida_list.html -->
+{% extends "accounts/base.html" %} {% block content %}
+<h2>Comidas</h2>
+<a href="{% url 'comida_create' %}">Create New Comida</a>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tipo</th>
+      <th>Hora</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comida in comidas %}
+    <tr>
+      <td>{{ comida.id }}</td>
+      <td>{{ comida.tipo }}</td>
+      <td>{{ comida.hora }}</td>
+      <td>
+        <a href="{% url 'comida_update' comida.id %}">Edit</a> |
+        <a href="{% url 'comida_delete' comida.id %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

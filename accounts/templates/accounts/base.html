@@ -1,0 +1,26 @@
+<!-- templates/accounts/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <h1>Admin Dashboard</h1>
+      <nav>
+        <a href="{% url 'ejercicio_list' %}">Ejercicios</a>
+        <a href="{% url 'planalimentacion_list' %}">Planes de Alimentación</a>
+        <a href="{% url 'comida_list' %}">Comidas</a>
+        <a href="{% url 'alimento_list' %}">Alimentos</a>
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer>
+      <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

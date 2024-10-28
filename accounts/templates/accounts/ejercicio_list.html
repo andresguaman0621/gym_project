@@ -1,0 +1,32 @@
+<!-- templates/accounts/ejercicio_list.html -->
+{% extends "accounts/base.html" %} {% block content %}
+<h2>Ejercicios</h2>
+<a href="{% url 'ejercicio_create' %}">Create New Ejercicio</a>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Series</th>
+      <th>Repeticiones</th>
+      <th>Peso Recomendado</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ejercicio in ejercicios %}
+    <tr>
+      <td>{{ ejercicio.id }}</td>
+      <td>{{ ejercicio.nombre }}</td>
+      <td>{{ ejercicio.series }}</td>
+      <td>{{ ejercicio.repeticiones }}</td>
+      <td>{{ ejercicio.pesoRecomendado }}</td>
+      <td>
+        <a href="{% url 'ejercicio_update' ejercicio.id %}">Edit</a> |
+        <a href="{% url 'ejercicio_delete' ejercicio.id %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

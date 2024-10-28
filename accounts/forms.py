@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida, Alimento
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, min_length=8)
@@ -41,4 +42,27 @@ class SecretKeyForm(forms.Form):
             raise ValidationError("Invalid secret key.")
         return secret_key
       
+class RutinaEntrenamientoForm(forms.ModelForm):
+    class Meta:
+        model = RutinaEntrenamiento
+        fields = ['fechaInicio', 'fechaFin']  
 
+class EjercicioForm(forms.ModelForm):
+    class Meta:
+        model = Ejercicio
+        fields = ['rutina', 'nombre', 'series', 'repeticiones', 'pesoRecomendado']
+
+class PlanAlimentacionForm(forms.ModelForm):
+    class Meta:
+        model = PlanAlimentacion
+        fields = ['fechaInicio', 'fechaFin']
+
+class ComidaForm(forms.ModelForm):
+    class Meta:
+        model = Comida
+        fields = ['plan', 'tipo', 'hora']
+
+class AlimentoForm(forms.ModelForm):
+    class Meta:
+        model = Alimento
+        fields = ['comida', 'nombre', 'cantidad', 'unidad']

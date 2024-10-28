@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Admin Dashboard</title>
-  </head>
-  <body>
-    <h1>Welcome to the Admin Dashboard</h1>
-  </body>
-</html>
+<!-- accounts/templates/accounts/admin_dashboard.html -->
+<h2>Admin Dashboard</h2>
+<ul>
+  <li><a href="{% url 'rutina_list' %}">Manage Rutinas</a></li>
+  <li><a href="{% url 'ejercicio_list' %}">Manage Ejercicios</a></li>
+  <li>
+    <a href="{% url 'planalimentacion_list' %}"
+      >Manage Planes de Alimentación</a
+    >
+  </li>
+  <li><a href="{% url 'comida_list' %}">Manage Comidas</a></li>
+  <li><a href="{% url 'alimento_list' %}">Manage Alimentos</a></li>
+</ul>
