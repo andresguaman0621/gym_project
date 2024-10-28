@@ -1,4 +1,3 @@
-# accounts/views.py
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
