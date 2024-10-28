@@ -28,4 +28,10 @@ urlpatterns = [
     
     path('client_dashboard/', account_views.client_dashboard, name='client_dashboard'),
     path('admin_dashboard/', account_views.admin_dashboard, name='admin_dashboard'),
+    
+    path('admin_secret_key/', account_views.admin_secret_key, name='admin_secret_key'),
+    path('admin_dashboard/', account_views.admin_dashboard, name='admin_dashboard'),
+    
+    path('logout/', account_views.logout_view, name='logout'),
+
 ]

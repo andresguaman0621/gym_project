@@ -31,3 +31,14 @@ class UserRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class SecretKeyForm(forms.Form):
+    secret_key = forms.CharField(widget=forms.PasswordInput, label="Enter Secret Key")
+
+    def clean_secret_key(self):
+        secret_key = self.cleaned_data.get('secret_key')
+        if secret_key != "MC60H-DWHD5-H80U9-6V85M-8280D":
+            raise ValidationError("Invalid secret key.")
+        return secret_key
+      
+
