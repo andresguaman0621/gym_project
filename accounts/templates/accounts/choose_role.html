@@ -1,12 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
     <title>Choose Role</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h2>Welcome, {{ user.username }}</h2>
-    <p>Please choose your role:</p>
-    <a href="{% url 'client_dashboard' %}">Client</a> |
-    <a href="{% url 'admin_dashboard' %}">Administrator</a>
+  <body
+    class="bg-[#232325] text-white flex items-center justify-center min-h-screen"
+  >
+    <div class="text-center">
+      <img
+        src="https://shorturl.at/bgbC5"
+        alt="FitTrack Logo"
+        class="mx-auto mb-6 w-16"
+      />
+      <!-- Replace with actual logo -->
+      <h1 class="text-3xl font-semibold text-[#FFFFFF] mb-2">
+        Welcome to FitTrack Gym
+      </h1>
+      <p class="text-gray-400 mb-8">Choose your role to continue</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Client Access -->
+        <div
+          class="border border-[#3F9216] rounded-lg p-6 bg-[#242426] text-left"
+        >
+          <h2 class="text-xl font-bold text-[#3F9216] flex items-center mb-4">
+            <span class="material-icons mr-2">person</span> Client Access
+          </h2>
+          <p class="text-gray-300 mb-4">
+            For gym members and fitness enthusiasts
+          </p>
+          <ul class="text-gray-400 list-disc list-inside space-y-2 mb-4">
+            <li>View and book classes</li>
+            <li>Track your workouts</li>
+            <li>Monitor your progress</li>
+            <li>Communicate with trainers</li>
+          </ul>
+          <a
+            href="{% url 'client_dashboard' %}"
+            class="block text-center bg-[#3F9216] hover:bg-[#2f6f11] text-white font-semibold py-2 rounded transition duration-200"
+          >
+            Enter as Client
+          </a>
+        </div>
+
+        <!-- Administrator Access -->
+        <div
+          class="border border-[#3F9216] rounded-lg p-6 bg-[#242426] text-left"
+        >
+          <h2 class="text-xl font-bold text-[#3F9216] flex items-center mb-4">
+            <span class="material-icons mr-2">shield</span> Administrator Access
+          </h2>
+          <p class="text-gray-300 mb-4">For gym staff and management</p>
+          <ul class="text-gray-400 list-disc list-inside space-y-2 mb-4">
+            <li>Manage member accounts</li>
+            <li>Schedule classes and trainers</li>
+            <li>View gym analytics</li>
+            <li>Handle billing and payments</li>
+          </ul>
+          <a
+            href="{% url 'admin_dashboard' %}"
+            class="block text-center bg-[#3F9216] hover:bg-[#2f6f11] text-white font-semibold py-2 rounded transition duration-200"
+          >
+            Enter as Administrator
+          </a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

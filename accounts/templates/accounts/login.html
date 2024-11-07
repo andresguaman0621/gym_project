@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>Login</title>
@@ -10,5 +10,85 @@
       <button type="submit">Login</button>
     </form>
     <a href="{% url 'register' %}">Don't have an account? Register here</a>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-[#232325] flex items-center justify-center min-h-screen text-white"
+  >
+    <div class="bg-[#242426] p-8 rounded-lg shadow-lg max-w-md w-full">
+      <div class="text-center mb-6">
+        <img
+          src="https://shorturl.at/bgbC5"
+          alt="Logo"
+          class="mx-auto mb-4 w-10 h-10"
+        />
+        <!-- Replace with actual logo -->
+        <h2 class="text-2xl font-bold text-white">Welcome back</h2>
+        <p class="text-gray-400">Please sign in to your account</p>
+      </div>
+
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-300"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="w-full px-4 py-2 bg-[#232424] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#3F9216]"
+            required
+          />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-300"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="w-full px-4 py-2 bg-[#232424] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#3F9216]"
+            required
+          />
+        </div>
+        <div class="flex items-center justify-between">
+          <label class="inline-flex items-center text-sm text-gray-300">
+            <input
+              type="checkbox"
+              class="form-checkbox h-4 w-4 text-[#3F9216]"
+            />
+            <span class="ml-2">Remember me</span>
+          </label>
+          <a href="#" class="text-sm text-[#3F9216] hover:underline"
+            >Forgot your password?</a
+          >
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-[#3F9216] hover:bg-[#2f6f11] text-white font-bold py-2 rounded-lg transition duration-200"
+        >
+          Sign in
+        </button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p class="text-gray-400">
+          Don't have an account?
+          <a href="{% url 'register' %}" class="text-[#3F9216] hover:underline"
+            >Sign up</a
+          >
+        </p>
+      </div>
+    </div>
   </body>
 </html>
