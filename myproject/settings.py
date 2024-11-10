@@ -132,4 +132,4 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'choose_role'
 LOGOUT_REDIRECT_URL = 'login'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-a12e7.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-a12e7.up.railway.app']
