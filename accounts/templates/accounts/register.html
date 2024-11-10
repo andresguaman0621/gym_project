@@ -1,14 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h2>Register</h2>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Register</button>
-    </form>
-    <a href="{% url 'login' %}">Already have an account? Login here</a>
+  <body class="bg-[#232325] min-h-screen flex items-center justify-center">
+    <div class="bg-[#242426] p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-3xl font-semibold text-white text-center mb-6">
+        Register
+      </h2>
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div class="flex flex-col">
+          <label class="text-gray-300 text-sm mb-1" for="username"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
+          />
+          <p class="text-gray-500 text-xs mt-1">
+            Required. 150 characters or fewer. Letters, digits, and @/./+/-/_
+            only.
+          </p>
+        </div>
+        <div class="flex flex-col">
+          <label class="text-gray-300 text-sm mb-1" for="email"
+            >Email address</label
+          >
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label class="text-gray-300 text-sm mb-1" for="password"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label class="text-gray-300 text-sm mb-1" for="confirm_password"
+            >Confirm password</label
+          >
+          <input
+            type="password"
+            name="confirm_password"
+            id="confirm_password"
+            class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full py-2 mt-4 bg-[#3F9216] text-white font-semibold rounded hover:bg-green-700 transition"
+        >
+          Register
+        </button>
+      </form>
+      <p class="text-center text-gray-400 text-sm mt-4">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-[#3F9216] hover:underline"
+          >Login here</a
+        >
+      </p>
+    </div>
   </body>
 </html>
