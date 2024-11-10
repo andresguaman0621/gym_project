@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ltdo70^!rs#rk0yn-0n9huln9*l$kue+3e(*#mo74mk((g)*7q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','*']
+ALLOWED_HOSTS = ['web-production-a12e7.up.railway.app','127.0.0.1', 'localhost','*']
 
 
 # Application definition
@@ -131,3 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'choose_role'
 LOGOUT_REDIRECT_URL = 'login'
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-a12e7.up.railway.app/']

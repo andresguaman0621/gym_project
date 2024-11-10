@@ -20,8 +20,11 @@ from accounts import views as account_views
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from accounts import views
+from django.shortcuts import redirect
 
 urlpatterns = [
+    path('', lambda request: redirect('login')),  # Redirige la raíz a login/
+    
     path('admin/', admin.site.urls),
     path('register/', account_views.register_view, name='register'),
     path('login/', account_views.login_view, name='login'),
