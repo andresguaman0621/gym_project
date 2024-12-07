@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Client Dashboard</title>
-  </head>
-  <body>
-    <h1>Welcome to the Client Dashboard</h1>
+<h1>Dashboard del Cliente</h1>
+<p>Peso: {{ perfil.peso }} kg</p>
+<p>Altura: {{ perfil.altura }} cm</p>
+<p>Objetivo: {{ perfil.objetivo }}</p>
+<a href="{% url 'actualizar_perfil' %}">Actualizar Datos</a>
 
-    <!-- Agregar el botón de logout -->
-    <form action="{% url 'logout' %}" method="post" style="display: inline">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
-    </form>
-  </body>
-</html>
+<h2>Tu Rutina</h2>
+{% if rutina %}
+<ul>
+  {% for ejercicio in rutina.ejercicios %}
+  <li>
+    {{ ejercicio.nombre }}: {{ ejercicio.series }} series, {{
+    ejercicio.repeticiones }} reps
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No tienes rutinas asignadas.</p>
+{% endif %}
+
+<h2>Tu Dieta</h2>
+{% if dieta %}
+<ul>
+  {% for detalle in dieta.detalles %}
+  <li>
+    <strong>{{ detalle.comida.tipo }}</strong>: {% for alimento in
+    detalle.alimentos %} {{ alimento.nombre }} ({{ alimento.cantidad }} {{
+    alimento.unidad }}), {% endfor %}
+  </li>
+</ul>
+{% else %}
+<p>No tienes una dieta asignada.</p>
+{% endif %}

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida, Alimento
+from .models import ClientePerfil
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, min_length=8)
@@ -67,3 +68,8 @@ class AlimentoForm(forms.ModelForm):
         model = Alimento
         fields = ['comida', 'nombre', 'cantidad', 'unidad']
 
+
+class ClientePerfilForm(forms.ModelForm):
+    class Meta:
+        model = ClientePerfil
+        fields = ['peso', 'altura', 'objetivo']

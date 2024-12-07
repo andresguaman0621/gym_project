@@ -31,7 +31,7 @@ urlpatterns = [
     path('choose_role/', account_views.choose_role, name='choose_role'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     
-    path('client_dashboard/', account_views.client_dashboard, name='client_dashboard'),
+    # path('client_dashboard/', account_views.client_dashboard, name='client_dashboard'),
     path('admin_dashboard/', account_views.admin_dashboard, name='admin_dashboard'),
     
     path('admin_secret_key/', account_views.admin_secret_key, name='admin_secret_key'),
@@ -66,6 +66,10 @@ urlpatterns = [
     path('planalimentacion/delete/<int:pk>', views.delete_planalimentacion, name='delete_planalimentacion'),
     path('comida/delete/<int:pk>', views.delete_comida, name='delete_comida'),
     path('alimento/delete/<int:pk>', views.delete_alimento, name='delete_alimento'),
-    
-    
+        
+        
+    # RUTAS CLIENTES
+    path('dashboard/', views.client_dashboard, name='client_dashboard'),
+    path('perfil/actualizar/', views.actualizar_perfil, name='actualizar_perfil'),
+    # path('registro/', views.registro_cliente, name='registro_cliente'),
 ]
