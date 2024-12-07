@@ -239,13 +239,6 @@ def delete_alimento(request, pk):
         return redirect('alimento_list')
     return render(request, 'accounts/alimento_confirm_delete.html', {'alimento': alimento})
 
-
-# CLIENTES
-# @login_required
-# def client_dashboard(request):
-#     perfil, created = ClientePerfil.objects.get_or_create(usuario=request.user)
-#     return render(request, 'accounts/client_dashboard.html', {'perfil': perfil})
-
 @login_required
 def client_dashboard(request):
     perfil = request.user.perfil  # Obtiene el perfil del cliente

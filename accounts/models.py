@@ -1,5 +1,4 @@
 # accounts/models.py
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,39 +10,6 @@ class RutinaEntrenamiento(models.Model):
     
     def __str__(self):
         return f'Rutina for {self.cliente} from {self.fecha_inicio} to {self.fecha_fin}'
-
-# class Ejercicio(models.Model):
-#     rutina = models.ForeignKey(RutinaEntrenamiento, on_delete=models.CASCADE, related_name='ejercicios')
-#     administrador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='ejercicios_creados')
-#     nombre = models.CharField(max_length=100)
-#     series = models.IntegerField()
-#     repeticiones = models.IntegerField()
-#     peso_recomendado = models.FloatField()
-
-#     def __str__(self):
-#         return str(self.nombre)
-
-# class Ejercicio(models.Model):
-#     rutina = models.ForeignKey(RutinaEntrenamiento, on_delete=models.CASCADE, related_name='ejercicios', null=True, blank=True)
-#     administrador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='ejercicios_creados')
-#     nombre = models.CharField(max_length=100)
-#     series = models.IntegerField()
-#     repeticiones = models.IntegerField()
-#     peso_recomendado = models.FloatField()
-
-#     def __str__(self):
-#         return str(self.nombre)
-
-# class Ejercicio(models.Model):
-#     rutina = models.ForeignKey(RutinaEntrenamiento, on_delete=models.CASCADE, related_name='ejercicios', null=True, blank=True)
-#     administrador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='ejercicios_creados')
-#     nombre = models.CharField(max_length=100)
-#     series = models.IntegerField()
-#     repeticiones = models.IntegerField()
-#     peso_recomendado = models.FloatField()
-
-#     def __str__(self):
-#         return str(self.nombre)
 
 class Ejercicio(models.Model):
     rutina = models.ForeignKey(
@@ -67,31 +33,6 @@ class Ejercicio(models.Model):
 
     def __str__(self):
         return str(self.nombre)
-
-
-
-# class Ejercicio(models.Model):
-#     rutina = models.ForeignKey(
-#         'RutinaEntrenamiento', 
-#         on_delete=models.CASCADE, 
-#         related_name='ejercicios', 
-#         null=True, 
-#         blank=True
-#     )
-#     administrador = models.ForeignKey(
-#         User, 
-#         on_delete=models.SET_NULL, 
-#         null=True, 
-#         blank=True, 
-#         related_name='ejercicios_creados'
-#     )
-#     nombre = models.CharField(max_length=100)
-#     series = models.IntegerField()
-#     repeticiones = models.IntegerField()
-#     peso_recomendado = models.FloatField()
-
-#     def __str__(self):
-#         return str(self.nombre)
 
 
 class PlanAlimentacion(models.Model):
