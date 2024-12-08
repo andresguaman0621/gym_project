@@ -6,10 +6,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import SecretKeyForm
 from django.contrib.auth import logout as auth_logout
-from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida, Alimento
-from .forms import RutinaEntrenamientoForm, EjercicioForm, PlanAlimentacionForm, ComidaForm, AlimentoForm
-from .models import Ejercicio, PlanAlimentacion, Comida, Alimento
-from .forms import EjercicioForm, PlanAlimentacionForm, ComidaForm, AlimentoForm
+from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida
+from .forms import RutinaEntrenamientoForm, EjercicioForm, PlanAlimentacionForm, ComidaForm
+from .models import Ejercicio, PlanAlimentacion, Comida
+from .forms import EjercicioForm, PlanAlimentacionForm, ComidaForm
 from .forms import ClientePerfilForm
 from .utils import generar_rutina_personalizada, generar_dieta_personalizada, obtener_rutina, obtener_dieta
 from .models import ClientePerfil  # Agrega esta línea
@@ -112,17 +112,8 @@ def create_comida(request):
         form = ComidaForm()
     return render(request, 'accounts/comida_form.html', {'form': form})
 
-def create_alimento(request):
-    if request.method == 'POST':
-        form = AlimentoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('alimento_list')
-    else:
-        form = AlimentoForm()
-    return render(request, 'accounts/alimento_form.html', {'form': form})
-  
-  
+
+    
   
 #demas metodos
 # List views
@@ -143,9 +134,6 @@ def comida_list(request):
     comidas = Comida.objects.all()
     return render(request, 'accounts/comida_list.html', {'comidas': comidas})
 
-def alimento_list(request):
-    alimentos = Alimento.objects.all()
-    return render(request, 'accounts/alimento_list.html', {'alimentos': alimentos})
 
 # Update views
 def update_rutina(request, pk):
@@ -192,16 +180,7 @@ def update_comida(request, pk):
         form = ComidaForm(instance=comida)
     return render(request, 'accounts/comida_form.html', {'form': form})
 
-def update_alimento(request, pk):
-    alimento = get_object_or_404(Alimento, pk=pk)
-    if request.method == 'POST':
-        form = AlimentoForm(request.POST, instance=alimento)
-        if form.is_valid():
-            form.save()
-            return redirect('alimento_list')
-    else:
-        form = AlimentoForm(instance=alimento)
-    return render(request, 'accounts/alimento_form.html', {'form': form})
+
 
 # Delete views
 def delete_rutina(request, pk):
@@ -232,12 +211,6 @@ def delete_comida(request, pk):
         return redirect('comida_list')
     return render(request, 'accounts/comida_confirm_delete.html', {'comida': comida})
 
-def delete_alimento(request, pk):
-    alimento = get_object_or_404(Alimento, pk=pk)
-    if request.method == 'POST':
-        alimento.delete()
-        return redirect('alimento_list')
-    return render(request, 'accounts/alimento_confirm_delete.html', {'alimento': alimento})
 
 @login_required
 def client_dashboard(request):
@@ -259,3 +232,4 @@ def actualizar_perfil(request):
     else:
         form = ClientePerfilForm(instance=perfil)
     return render(request, 'accounts/actualizar_perfil.html', {'form': form})
+

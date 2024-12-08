@@ -29,7 +29,7 @@ urlpatterns = [
     path('register/', account_views.register_view, name='register'),
     path('login/', account_views.login_view, name='login'),
     path('choose_role/', account_views.choose_role, name='choose_role'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     
     # path('client_dashboard/', account_views.client_dashboard, name='client_dashboard'),
     path('admin_dashboard/', account_views.admin_dashboard, name='admin_dashboard'),
@@ -44,28 +44,28 @@ urlpatterns = [
     path('ejercicios/', views.ejercicio_list, name='ejercicio_list'),
     path('planes_alimentacion/', views.planalimentacion_list, name='planalimentacion_list'),
     path('comidas/', views.comida_list, name='comida_list'),
-    path('alimentos/', views.alimento_list, name='alimento_list'),
+    
 
     # Create views
     path('rutina/create/', views.create_rutina, name='create_rutina'),
     path('ejercicio/create/', views.create_ejercicio, name='create_ejercicio'),
     path('planalimentacion/create/', views.create_planalimentacion, name='create_planalimentacion'),
     path('comida/create/', views.create_comida, name='create_comida'),
-    path('alimento/create/', views.create_alimento, name='create_alimento'),
+    
 
     # Update views
     path('rutina/update/<int:pk>/', views.update_rutina, name='update_rutina'),
     path('ejercicio/update/<int:pk>/', views.update_ejercicio, name='update_ejercicio'),
     path('planalimentacion/update/<int:pk>/', views.update_planalimentacion, name='update_planalimentacion'),
     path('comida/update/<int:pk>/', views.update_comida, name='update_comida'),
-    path('alimento/update/<int:pk>', views.update_alimento, name='update_alimento'),
+    
     
     # Delete views
     path('rutina/delete/<int:pk>', views.delete_rutina, name='delete_rutina'),
     path('ejercicio/delete/<int:pk>', views.delete_ejercicio, name='delete_ejercicio'),
     path('planalimentacion/delete/<int:pk>', views.delete_planalimentacion, name='delete_planalimentacion'),
     path('comida/delete/<int:pk>', views.delete_comida, name='delete_comida'),
-    path('alimento/delete/<int:pk>', views.delete_alimento, name='delete_alimento'),
+    
         
         
     # RUTAS CLIENTES

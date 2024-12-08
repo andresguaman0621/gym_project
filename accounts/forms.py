@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida, Alimento
+from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida
 from .models import ClientePerfil
 
 class UserRegistrationForm(forms.ModelForm):
@@ -51,7 +51,8 @@ class RutinaEntrenamientoForm(forms.ModelForm):
 class EjercicioForm(forms.ModelForm):
     class Meta:
         model = Ejercicio
-        fields = ['rutina', 'nombre', 'series', 'repeticiones', 'peso_recomendado']
+        fields = ['nombre', 'series', 'repeticiones', 'peso_recomendado']
+
 
 class PlanAlimentacionForm(forms.ModelForm):
     class Meta:
@@ -61,12 +62,7 @@ class PlanAlimentacionForm(forms.ModelForm):
 class ComidaForm(forms.ModelForm):
     class Meta:
         model = Comida
-        fields = ['plan', 'tipo', 'hora']
-
-class AlimentoForm(forms.ModelForm):
-    class Meta:
-        model = Alimento
-        fields = ['comida', 'nombre', 'cantidad', 'unidad']
+        fields = ['tipo', 'hora', 'nombre', 'cantidad', 'unidad']
 
 
 class ClientePerfilForm(forms.ModelForm):

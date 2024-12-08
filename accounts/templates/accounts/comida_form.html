@@ -1,13 +1,6 @@
 <!-- templates/accounts/comida_form.html -->
-{% extends "accounts/base.html" %} {% block content %}
-<h2>
-  {% if form.instance.pk %}Update Comida{% else %}Create Comida{% endif %}
-</h2>
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit">
-    {% if form.instance.pk %}Update{% else %}Create{% endif %}
-  </button>
+  <button type="submit">Guardar</button>
 </form>
-<a href="{% url 'comida_list' %}">Back to Comidas</a>
-{% endblock %}
+<a href="{% url 'comida_list' %}">Volver a la lista</a>

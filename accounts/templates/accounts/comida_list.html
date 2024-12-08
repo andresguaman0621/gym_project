@@ -1,28 +1,26 @@
 <!-- templates/accounts/comida_list.html -->
 {% extends "accounts/base.html" %} {% block content %}
-<h2>Comidas</h2>
-<a href="{% url 'create_comida' %}">Create New Comida</a>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Tipo</th>
-      <th>Hora</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for comida in comidas %}
-    <tr>
-      <td>{{ comida.id }}</td>
-      <td>{{ comida.tipo }}</td>
-      <td>{{ comida.hora }}</td>
-      <td>
-        <a href="{% url 'update_comida' comida.id %}">Edit</a> |
-        <a href="{% url 'delete_comida' comida.id %}">Delete</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Comidas</title>
+  </head>
+  <body>
+    <h1>Lista de Comidas</h1>
+    <a href="{% url 'create_comida' %}">Crear Nueva Comida</a>
+    <ul>
+      {% for comida in comidas %}
+      <li>
+        {{ comida.tipo }} - {{ comida.nombre }} ({{ comida.cantidad }} {{
+        comida.unidad }})
+        <a href="{% url 'update_comida' comida.pk %}">Editar</a>
+        <a href="{% url 'delete_comida' comida.pk %}">Eliminar</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
+  </body>
+</html>
 {% endblock %}
