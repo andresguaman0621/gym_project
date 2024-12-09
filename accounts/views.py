@@ -54,7 +54,7 @@ def admin_secret_key(request):
     if request.method == 'POST':
         form = SecretKeyForm(request.POST)
         if form.is_valid():
-            # Store validation status in the session
+            
             request.session['admin_key_validated'] = True
             return redirect('admin_dashboard')
         else:
