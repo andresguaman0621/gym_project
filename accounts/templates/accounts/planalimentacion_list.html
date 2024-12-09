@@ -1,28 +1,45 @@
-<!-- templates/accounts/planalimentacion_list.html -->
 {% extends "accounts/base.html" %} {% block content %}
-<h2>Planes de Alimentación</h2>
-<a href="{% url 'create_planalimentacion' %}">Create New Plan</a>
+<h2>Lista de Planes de Alimentación</h2>
+<a href="{% url 'create_planalimentacion' %}">Crear Nuevo Plan</a>
 <table>
   <thead>
     <tr>
       <th>ID</th>
-      <th>Fecha Inicio</th>
-      <th>Fecha Fin</th>
-      <th>Actions</th>
+      <th>Cliente</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Fin</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     {% for plan in planes %}
     <tr>
       <td>{{ plan.id }}</td>
-      <td>{{ plan.fechaInicio }}</td>
-      <td>{{ plan.fechaFin }}</td>
+      <td>{{ plan.cliente.username }}</td>
+      <td>{{ plan.fecha_inicio|date:"M d, Y" }}</td>
+      <td>{{ plan.fecha_fin|date:"M d, Y" }}</td>
       <td>
-        <a href="{% url 'update_planalimentacion' plan.id %}">Edit</a> |
-        <a href="{% url 'delete_planalimentacion' plan.id %}">Delete</a>
+        <a href="{% url 'update_planalimentacion' plan.pk %}">Editar</a> |
+        <a href="{% url 'delete_planalimentacion' plan.pk %}">Eliminar</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <strong>Detalles de comidas asignadas:</strong>
+        <ul>
+          {% for comida in plan.comidas.all %}
+          <li>
+            Tipo: {{ comida.tipo }}, Nombre: {{ comida.nombre }}, Cantidad: {{
+            comida.cantidad }} {{ comida.unidad }}, Hora: {{ comida.hora }}
+          </li>
+          {% empty %}
+          <li>No hay comidas asignadas.</li>
+          {% endfor %}
+        </ul>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
 {% endblock %}

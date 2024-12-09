@@ -1,51 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Cliente</title>
-  </head>
-  <body>
-    <h1>Bienvenido, {{ perfil.usuario.username }}</h1>
-    <h2>Tu Información</h2>
-    <ul>
-      <li><strong>Peso:</strong> {{ perfil.peso }} kg</li>
-      <li><strong>Altura:</strong> {{ perfil.altura }} cm</li>
-      <li><strong>Objetivo:</strong> {{ perfil.objetivo }}</li>
-    </ul>
-    <a href="{% url 'actualizar_perfil' %}">Actualizar Perfil</a>
+<h1>Bienvenido, {{ perfil.usuario.username }}</h1>
 
-    <h2>Rutina Personalizada</h2>
-    {% if rutina %}
-    <p><strong>Fecha de inicio:</strong> {{ rutina.rutina.fecha_inicio }}</p>
-    <p><strong>Fecha de fin:</strong> {{ rutina.rutina.fecha_fin }}</p>
-    <ul>
-      {% for ejercicio in rutina.ejercicios %}
-      <li>
-        {{ ejercicio.nombre }} - {{ ejercicio.series }} series de {{
-        ejercicio.repeticiones }} repeticiones
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No tienes una rutina asignada.</p>
-    {% endif %}
+<h2>Tu Información</h2>
+<ul>
+  <li>Peso: {{ perfil.peso }} kg</li>
+  <li>Altura: {{ perfil.altura }} cm</li>
+  <li>Objetivo: {{ perfil.objetivo }}</li>
+</ul>
+<a href="{% url 'actualizar_perfil' %}">Actualizar Perfil</a>
 
-    <h2>Dieta Personalizada</h2>
-    {% if dieta %}
-    <p><strong>Válida desde:</strong> {{ dieta.dieta.fecha_inicio }}</p>
-    <p><strong>Válida hasta:</strong> {{ dieta.dieta.fecha_fin }}</p>
-    <ul>
-      {% for comida in dieta.detalles %}
-      <li>
-        <strong>{{ comida.comida.tipo }} ({{ comida.comida.hora }}):</strong>
-        {{ comida.comida.nombre }} - {{ comida.comida.cantidad }} {{
-        comida.comida.unidad }}
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No tienes una dieta asignada.</p>
-    {% endif %}
-  </body>
-</html>
+<h2>Rutina Personalizada</h2>
+{% if rutina %}
+<p>Fecha de inicio: {{ rutina.rutina.fecha_inicio }}</p>
+<p>Fecha de fin: {{ rutina.rutina.fecha_fin }}</p>
+<ul>
+  {% for ejercicio in rutina.ejercicios %}
+  <li>
+    {{ ejercicio.nombre }} - series: {{ ejercicio.series }} - repeticiones:
+    {{ejercicio.repeticiones}} - peso: {{ ejercicio.peso_recomendado}}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No tienes una rutina asignada.</p>
+{% endif %}
+
+<h2>Dieta Personalizada</h2>
+{% if dieta %}
+<p>Válida desde: {{ dieta.dieta.fecha_inicio }}</p>
+<p>Válida hasta: {{ dieta.dieta.fecha_fin }}</p>
+<ul>
+  {% for detalle in dieta.detalles %}
+  <li>
+    Tipo: {{ detalle.tipo }} - Nombre: {{ detalle.nombre }} - Cantidad:
+    {{comida.cantidad}} {{ detalle.unidad }} - Hora: {{ detalle.hora }}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No tienes una dieta asignada.</p>
+{% endif %}
+<a href="{% url 'logout' %}">Cerrar Sesión</a>

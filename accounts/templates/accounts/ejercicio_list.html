@@ -20,7 +20,8 @@
       <td>{{ ejercicio.nombre }}</td>
       <td>{{ ejercicio.series }}</td>
       <td>{{ ejercicio.repeticiones }}</td>
-      <td>{{ ejercicio.pesoRecomendado }}</td>
+      <td>{{ ejercicio.peso_recomendado }}</td>
+      <!-- Cambio realizado -->
       <td>
         <a href="{% url 'update_ejercicio' ejercicio.id %}">Edit</a> |
         <a href="{% url 'delete_ejercicio' ejercicio.id %}">Delete</a>

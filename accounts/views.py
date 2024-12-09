@@ -111,9 +111,7 @@ def create_comida(request):
     else:
         form = ComidaForm()
     return render(request, 'accounts/comida_form.html', {'form': form})
-
-
-    
+ 
   
 #demas metodos
 # List views
@@ -232,4 +230,5 @@ def actualizar_perfil(request):
     else:
         form = ClientePerfilForm(instance=perfil)
     return render(request, 'accounts/actualizar_perfil.html', {'form': form})
+
 

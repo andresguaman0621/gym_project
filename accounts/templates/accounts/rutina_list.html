@@ -1,25 +1,44 @@
-{% extends 'accounts/base.html' %} {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Rutinas</title>
-  </head>
-  <body>
-    <h1>Lista de Rutinas</h1>
-    <ul>
-      {% for rutina in rutinas %}
-      <li>
-        Rutina para {{ rutina.cliente.username }} del {{ rutina.fecha_inicio }}
-        al {{ rutina.fecha_fin }}
-        <a href="{% url 'update_rutina' rutina.pk %}">Editar</a>
+{% extends "accounts/base.html" %} {% block content %}
+<h2>Lista de Rutinas</h2>
+<a href="{% url 'create_rutina' %}">Crear Nueva Rutina</a>
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Fin</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rutina in rutinas %}
+    <tr>
+      <td>{{ rutina.cliente.username }}</td>
+      <td>{{ rutina.fecha_inicio|date:"M d, Y" }}</td>
+      <td>{{ rutina.fecha_fin|date:"M d, Y" }}</td>
+      <td>
+        <a href="{% url 'update_rutina' rutina.pk %}">Editar</a> |
         <a href="{% url 'delete_rutina' rutina.pk %}">Eliminar</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
-  </body>
-</html>
-
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <strong>Detalles de los ejercicios asignados:</strong>
+        <ul>
+          {% for ejercicio in rutina.ejercicios.all %}
+          <li>
+            {{ ejercicio.nombre }} - Series: {{ ejercicio.series }},
+            Repeticiones: {{ ejercicio.repeticiones }}, Peso Recomendado: {{
+            ejercicio.peso_recomendado }}
+          </li>
+          {% empty %}
+          <li>No hay ejercicios asignados.</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
 {% endblock %}
