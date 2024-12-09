@@ -32,7 +32,7 @@
   {% for detalle in dieta.detalles %}
   <li>
     Tipo: {{ detalle.tipo }} - Nombre: {{ detalle.nombre }} - Cantidad:
-    {{comida.cantidad}} {{ detalle.unidad }} - Hora: {{ detalle.hora }}
+    {{detalle.cantidad}} {{detalle.unidad}} - Hora: {{ detalle.hora }}
   </li>
   {% endfor %}
 </ul>

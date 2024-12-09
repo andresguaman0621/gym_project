@@ -13,6 +13,7 @@ from .forms import EjercicioForm, PlanAlimentacionForm, ComidaForm
 from .forms import ClientePerfilForm
 from .utils import generar_rutina_personalizada, generar_dieta_personalizada, obtener_rutina, obtener_dieta
 from .models import ClientePerfil  # Agrega esta línea
+from .decorators import superadmin_required
 
 
 def register_view(request):
@@ -29,6 +30,10 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
+        # Si ya hay un usuario autenticado, cerrar la sesión actual
+        if request.user.is_authenticated:
+            auth_logout(request)
+
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
@@ -42,11 +47,9 @@ def login_view(request):
 def choose_role(request):
     return render(request, 'accounts/choose_role.html')
   
-# @login_required
-# def client_dashboard(request):
-#     return render(request, 'accounts/client_dashboard.html')
 
 @login_required
+@superadmin_required 
 def admin_secret_key(request):
     if request.method == 'POST':
         form = SecretKeyForm(request.POST)
@@ -61,6 +64,7 @@ def admin_secret_key(request):
     return render(request, 'accounts/admin_secret_key.html', {'form': form})
 
 @login_required
+@superadmin_required
 def admin_dashboard(request):
     # Check if user has validated the secret key
     if not request.session.get('admin_key_validated'):
@@ -71,7 +75,9 @@ def logout_view(request):
     request.session['admin_key_validated'] = False  # Clear the session variable
     auth_logout(request)
     return redirect('login')
-  
+
+@login_required
+@superadmin_required 
 def create_rutina(request):
     if request.method == 'POST':
         form = RutinaEntrenamientoForm(request.POST)
@@ -82,6 +88,8 @@ def create_rutina(request):
         form = RutinaEntrenamientoForm()
     return render(request, 'accounts/rutina_form.html', {'form': form})
 
+@login_required
+@superadmin_required 
 def create_ejercicio(request):
     if request.method == 'POST':
         form = EjercicioForm(request.POST)
@@ -128,12 +136,16 @@ def planalimentacion_list(request):
     planes = PlanAlimentacion.objects.all()
     return render(request, 'accounts/planalimentacion_list.html', {'planes': planes})
 
+@login_required
+@superadmin_required 
 def comida_list(request):
     comidas = Comida.objects.all()
     return render(request, 'accounts/comida_list.html', {'comidas': comidas})
 
 
 # Update views
+@login_required
+@superadmin_required 
 def update_rutina(request, pk):
     rutina = get_object_or_404(RutinaEntrenamiento, pk=pk)
     if request.method == 'POST':
@@ -145,6 +157,8 @@ def update_rutina(request, pk):
         form = RutinaEntrenamientoForm(instance=rutina)
     return render(request, 'accounts/rutina_form.html', {'form': form})
 
+@login_required
+@superadmin_required 
 def update_ejercicio(request, pk):
     ejercicio = get_object_or_404(Ejercicio, pk=pk)
     if request.method == 'POST':
@@ -156,6 +170,8 @@ def update_ejercicio(request, pk):
         form = EjercicioForm(instance=ejercicio)
     return render(request, 'accounts/ejercicio_form.html', {'form': form})
 
+@login_required
+@superadmin_required 
 def update_planalimentacion(request, pk):
     plan = get_object_or_404(PlanAlimentacion, pk=pk)
     if request.method == 'POST':
@@ -167,6 +183,8 @@ def update_planalimentacion(request, pk):
         form = PlanAlimentacionForm(instance=plan)
     return render(request, 'accounts/planalimentacion_form.html', {'form': form})
 
+@login_required
+@superadmin_required 
 def update_comida(request, pk):
     comida = get_object_or_404(Comida, pk=pk)
     if request.method == 'POST':
@@ -179,8 +197,9 @@ def update_comida(request, pk):
     return render(request, 'accounts/comida_form.html', {'form': form})
 
 
-
 # Delete views
+@login_required
+@superadmin_required 
 def delete_rutina(request, pk):
     rutina = get_object_or_404(RutinaEntrenamiento, pk=pk)
     if request.method == 'POST':
@@ -188,6 +207,8 @@ def delete_rutina(request, pk):
         return redirect('rutina_list')
     return render(request, 'accounts/rutina_confirm_delete.html', {'rutina': rutina})
 
+@login_required
+@superadmin_required 
 def delete_ejercicio(request, pk):
     ejercicio = get_object_or_404(Ejercicio, pk=pk)
     if request.method == 'POST':
@@ -195,6 +216,8 @@ def delete_ejercicio(request, pk):
         return redirect('ejercicio_list')
     return render(request, 'accounts/ejercicio_confirm_delete.html', {'ejercicio': ejercicio})
 
+@login_required
+@superadmin_required 
 def delete_planalimentacion(request, pk):
     plan = get_object_or_404(PlanAlimentacion, pk=pk)
     if request.method == 'POST':
@@ -202,6 +225,8 @@ def delete_planalimentacion(request, pk):
         return redirect('planalimentacion_list')
     return render(request, 'accounts/planalimentacion_confirm_delete.html', {'plan': plan})
 
+@login_required
+@superadmin_required 
 def delete_comida(request, pk):
     comida = get_object_or_404(Comida, pk=pk)
     if request.method == 'POST':
