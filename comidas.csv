@@ -1,0 +1,21 @@
+tipo,hora,nombre,cantidad,unidad
+Proteína,07:30:00,Pollo (pechuga),200,gramos
+Carbohidrato,08:00:00,Arroz integral,150,gramos
+Proteína,08:30:00,Huevos (enteros),3,unidades
+Grasas,09:00:00,Aguacate,50,gramos
+Proteína,12:00:00,Pechuga de pavo,150,gramos
+Carbohidrato,13:00:00,Pasta integral,120,gramos
+Verduras,14:00:00,Brócoli al vapor,100,gramos
+Proteína,16:00:00,Batido de proteína,1,medida (30g)
+Carbohidrato,19:00:00,Batata (camote),200,gramos
+Grasas,20:00:00,Almendras,20,gramos
+Proteína,21:00:00,Atún (en agua),120,gramos
+Carbohidrato,19:30:00,Quinoa,100,gramos
+Verduras,12:30:00,Espárragos asados,150,gramos
+Proteína,08:30:00,Yogurt griego (sin azúcar),150,gramos
+Carbohidrato,14:30:00,Papas asadas,180,gramos
+Grasas,17:00:00,Mantequilla de almendra,20,gramos
+Proteína,11:00:00,Pechuga de pollo a la plancha,100,gramos
+Carbohidrato,16:30:00,Avena,40,gramos
+Verduras,18:00:00,Zanahorias (cocidas),80,gramos
+Grasas,21:30:00,Aceite de oliva (para ensalada),10,cucharada

@@ -61,6 +61,7 @@ class Comida(models.Model):
 
 
 # MODELO CLIENTE
+
 class ClientePerfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
     peso = models.FloatField(null=True, blank=True)
@@ -71,10 +72,17 @@ class ClientePerfil(models.Model):
         null=True,
         blank=True
     )
+    genero = models.CharField(
+        max_length=10,
+        choices=[('masculino', 'Masculino'), ('femenino', 'Femenino')],
+        null=True,
+        blank=True
+    )
     ultima_actualizacion = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'Perfil de {self.usuario.username}'
+
 
     
 # REGISTRO CLIENTE

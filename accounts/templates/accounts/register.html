@@ -11,6 +11,16 @@
       <h2 class="text-3xl font-semibold text-white text-center mb-6">
         Register
       </h2>
+
+      <!-- Mostrar errores generales -->
+      {% if form.non_field_errors %}
+      <div class="bg-red-500 text-white p-2 rounded mb-4">
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
       <form method="post" class="space-y-4">
         {% csrf_token %}
         <div class="flex flex-col">
@@ -23,11 +33,20 @@
             id="username"
             class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
           />
+
           <p class="text-gray-500 text-xs mt-1">
             Required. 150 characters or fewer. Letters, digits, and @/./+/-/_
             only.
           </p>
         </div>
+
+        <!-- Mostrar errores específicos de username -->
+        {% if form.username.errors %}
+        <p class="text-red-500 text-sm mt-1">
+          {% for error in form.username.errors %} {{ error }} {% endfor %}
+        </p>
+        {% endif %}
+
         <div class="flex flex-col">
           <label class="text-gray-300 text-sm mb-1" for="email"
             >Email address</label
@@ -39,6 +58,12 @@
             class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
           />
         </div>
+        <!-- Mostrar errores específicos de email -->
+        {% if form.email.errors %}
+        <p class="text-red-500 text-sm mt-1">
+          {% for error in form.email.errors %} {{ error }} {% endfor %}
+        </p>
+        {% endif %}
         <div class="flex flex-col">
           <label class="text-gray-300 text-sm mb-1" for="password"
             >Password</label
@@ -49,6 +74,13 @@
             id="password"
             class="px-4 py-2 rounded bg-[#232424] text-white border border-gray-600 focus:outline-none focus:border-[#3F9216]"
           />
+
+          <!-- Mostrar errores específicos de password -->
+          {% if form.password.errors %}
+          <p class="text-red-500 text-sm mt-1">
+            {% for error in form.password.errors %} {{ error }} {% endfor %}
+          </p>
+          {% endif %}
         </div>
         <div class="flex flex-col">
           <label class="text-gray-300 text-sm mb-1" for="confirm_password"

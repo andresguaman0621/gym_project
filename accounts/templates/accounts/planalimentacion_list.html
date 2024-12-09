@@ -1,45 +1,127 @@
-{% extends "accounts/base.html" %} {% block content %}
-<h2>Lista de Planes de Alimentación</h2>
-<a href="{% url 'create_planalimentacion' %}">Crear Nuevo Plan</a>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Cliente</th>
-      <th>Fecha de Inicio</th>
-      <th>Fecha de Fin</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for plan in planes %}
-    <tr>
-      <td>{{ plan.id }}</td>
-      <td>{{ plan.cliente.username }}</td>
-      <td>{{ plan.fecha_inicio|date:"M d, Y" }}</td>
-      <td>{{ plan.fecha_fin|date:"M d, Y" }}</td>
-      <td>
-        <a href="{% url 'update_planalimentacion' plan.pk %}">Editar</a> |
-        <a href="{% url 'delete_planalimentacion' plan.pk %}">Eliminar</a>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="5">
-        <strong>Detalles de comidas asignadas:</strong>
-        <ul>
-          {% for comida in plan.comidas.all %}
-          <li>
-            Tipo: {{ comida.tipo }}, Nombre: {{ comida.nombre }}, Cantidad: {{
-            comida.cantidad }} {{ comida.unidad }}, Hora: {{ comida.hora }}
-          </li>
-          {% empty %}
-          <li>No hay comidas asignadas.</li>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Planes de Alimentación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-accent {
+        background-color: #3f9216;
+      }
+      .bg-bt {
+        background-color: #4b4b51; /* Verde personalizado para el fondo */
+      }
+      .bg-dark-main {
+        background-color: #232325;
+      }
+      .bg-dark-secondary {
+        background-color: #242426;
+      }
+      .text-accent {
+        color: #3f9216;
+      }
+    </style>
+  </head>
+  <body class="bg-dark-main text-white min-h-screen">
+    <div class="container mx-auto p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Lista de Planes de Alimentación</h2>
+        <div>
+          <a
+            href="{% url 'create_planalimentacion' %}"
+            class="bg-bt text-white px-4 py-2 rounded hover:bg-gray-700"
+          >
+            <span class="mr-2">+</span> Crear Nuevo Plan
+          </a>
+          <a
+            href="{% url 'admin_dashboard' %}"
+            class="bg-accent text-white px-4 py-2 rounded hover:bg-green-700 ml-4"
+          >
+            ← Volver al Dashboard
+          </a>
+        </div>
+      </div>
+
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-dark-secondary">
+            <th class="p-3 border-b border-gray-600">ID</th>
+            <th class="p-3 border-b border-gray-600">Cliente</th>
+            <th class="p-3 border-b border-gray-600">Fecha de Inicio</th>
+            <th class="p-3 border-b border-gray-600">Fecha de Fin</th>
+            <th class="p-3 border-b border-gray-600">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for plan in planes %}
+          <tr class="hover:bg-gray-700">
+            <td class="p-3 border-b border-gray-600">{{ plan.id }}</td>
+            <td class="p-3 border-b border-gray-600">
+              {{ plan.cliente.username }}
+            </td>
+            <td class="p-3 border-b border-gray-600">
+              {{ plan.fecha_inicio|date:"M d, Y" }}
+            </td>
+            <td class="p-3 border-b border-gray-600">
+              {{ plan.fecha_fin|date:"M d, Y" }}
+            </td>
+            <td class="p-3 border-b border-gray-600 flex space-x-4">
+              <a
+                href="{% url 'update_planalimentacion' plan.pk %}"
+                class="text-accent hover:underline flex items-center"
+              >
+                Editar
+              </a>
+              <a
+                href="{% url 'delete_planalimentacion' plan.pk %}"
+                class="text-red-500 hover:underline flex items-center"
+              >
+                Eliminar
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" class="p-3 bg-dark-secondary">
+              <button
+                class="text-white hover:text-accent flex items-center"
+                onclick="toggleDropdown('dropdown-{{ plan.pk }}')"
+              >
+                <span class="mr-2">▼</span> Detalles de comidas asignadas
+              </button>
+              <div
+                id="dropdown-{{ plan.pk }}"
+                class="hidden mt-2 text-gray-300"
+              >
+                <ul class="list-disc pl-5">
+                  {% for comida in plan.comidas.all %}
+                  <li>
+                    <span class="font-bold">Tipo:</span> {{ comida.tipo }},
+                    <span class="font-bold">Nombre:</span> {{ comida.nombre }},
+                    <span class="font-bold">Cantidad:</span> {{ comida.cantidad
+                    }} {{ comida.unidad }},
+                    <span class="font-bold">Hora:</span> {{ comida.hora }}
+                  </li>
+                  {% empty %}
+                  <li>No hay comidas asignadas.</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </td>
+          </tr>
           {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<a href="{% url 'admin_dashboard' %}">Volver al Dashboard</a>
-{% endblock %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      function toggleDropdown(id) {
+        const dropdown = document.getElementById(id);
+        if (dropdown.classList.contains("hidden")) {
+          dropdown.classList.remove("hidden");
+        } else {
+          dropdown.classList.add("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>

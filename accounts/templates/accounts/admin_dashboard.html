@@ -4,20 +4,147 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Administrador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-accent {
+        background-color: #3f9216;
+      }
+      .bg-dark-main {
+        background-color: #232325;
+      }
+      .bg-dark-secondary {
+        background-color: #242426;
+      }
+      .text-accent {
+        color: #3f9216;
+      }
+    </style>
   </head>
-  <body>
-    <h1>Bienvenido, Superadministrador</h1>
-    <h2>Gestión de Datos</h2>
-    <ul>
-      <li><a href="{% url 'rutina_list' %}">Gestión de Rutinas</a></li>
-      <li><a href="{% url 'ejercicio_list' %}">Gestión de Ejercicios</a></li>
-      <li>
-        <a href="{% url 'planalimentacion_list' %}"
-          >Gestión de Planes de Alimentación</a
-        >
-      </li>
-      <li><a href="{% url 'comida_list' %}">Gestión de Comidas</a></li>
-    </ul>
-    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+  <body class="bg-dark-main text-white min-h-screen">
+    <!-- Sidebar -->
+    <div class="flex flex-col md:flex-row">
+      <!-- Menú lateral -->
+      <div class="w-full md:w-1/4 bg-dark-secondary p-6">
+        <h1 class="text-2xl font-bold mb-6 text-accent">Admin Dashboard</h1>
+        <ul>
+          <li class="mb-4">
+            <a
+              href="{% url 'rutina_list' %}"
+              class="flex items-center text-white hover:text-accent"
+            >
+              <!-- Ícono desde URL -->
+              <img
+                src="https://scontent.fuio1-1.fna.fbcdn.net/v/t1.15752-9/466747568_3917791765170217_1391353890746430597_n.png?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEEsrI36uln6mMTEYcwR9rSry7ThCjClLuvLtOEKMKUu8lX43jrm_g6GekzIX8H0YOoXHG4ntAJmvpqbgV-mDCM&_nc_ohc=NALLAOMJmUoQ7kNvgEkEKW4&_nc_zt=23&_nc_ht=scontent.fuio1-1.fna&oh=03_Q7cD1QEkncbBz2OlqmaBjJMxQ7eep79MX-JgaemLGW9XjZGLkQ&oe=677ED080"
+                alt="Icono Rutinas"
+                class="w-5 h-5 mr-2"
+              />
+              Gestión de Rutinas
+            </a>
+          </li>
+          <li class="mb-4">
+            <a
+              href="{% url 'ejercicio_list' %}"
+              class="flex items-center text-white hover:text-accent"
+            >
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462566327_1281998786140199_2674171792626505868_n.png?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHW4_nDGxJ8ZmhWg4VsTtwfdX5AXt-svPZ1fkBe36y89nhZxVSo9vFmi7j0q2uOxseipQJFNqA58bE-XzCqVyVn&_nc_ohc=hfUw5NRmAMgQ7kNvgF2z_4v&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QG6fdFpIdNBYCxZA427GcpxOw3ngYD_lSGi1J_nXf8_UQ&oe=677EE2CB"
+                alt="Icono Ejercicios"
+                class="w-6 h-6 mr-2"
+              />
+              Gestión de Ejercicios
+            </a>
+          </li>
+          <li class="mb-4">
+            <a
+              href="{% url 'planalimentacion_list' %}"
+              class="flex items-center text-white hover:text-accent"
+            >
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462575228_1344483843654930_8467205112234078370_n.png?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHfu4WH7Vo70NAgXBGEaVL4Wpmm7am8z61amabtqbzPrYHSuqqdoBk9QPAMgSzoCm-Dl3k14rQOXx_2-j_VNXuv&_nc_ohc=RGkKpzQLWC0Q7kNvgG5iC3y&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QElF2yh_TKTP0exU-1mPGJo_o6iV3s06ufN4rmXeGIBtA&oe=677EDB3F"
+                alt="Icono Planes"
+                class="w-6 h-6 mr-2"
+              />
+              Gestión de Planes de Alimentación
+            </a>
+          </li>
+          <li class="mb-4">
+            <a
+              href="{% url 'comida_list' %}"
+              class="flex items-center text-white hover:text-accent"
+            >
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462541514_613142224571253_8619467218517172465_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGWcw_o4gbrz8cF5DgiwJcxQZSEfv812YFBlIR-_zXZgXQk8lSSaTvGY3763zeIIbLkda2jYR7MnD4M0UfSiNB0&_nc_ohc=0i50sSj3eDUQ7kNvgF8Be8_&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QEhEe1pF1Z24gAztnktv4y0W7ZF8pJBZALJWsyiw_qpFA&oe=677EB728"
+                alt="Icono Comidas"
+                class="w-6 h-6 mr-2"
+              />
+              Gestión de Comidas
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contenido principal -->
+      <div class="w-full md:w-3/4 p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-3xl font-bold">Bienvenido, Aministrador</h2>
+          <a
+            href="{% url 'logout' %}"
+            class="text-white bg-accent px-4 py-2 rounded hover:bg-green-700"
+          >
+            Cerrar Sesión
+          </a>
+        </div>
+
+        <!-- Tarjetas de métricas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-dark-secondary p-4 rounded shadow">
+            <div class="flex items-center justify-between">
+              <img
+                src="https://scontent.fuio1-1.fna.fbcdn.net/v/t1.15752-9/466747568_3917791765170217_1391353890746430597_n.png?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEEsrI36uln6mMTEYcwR9rSry7ThCjClLuvLtOEKMKUu8lX43jrm_g6GekzIX8H0YOoXHG4ntAJmvpqbgV-mDCM&_nc_ohc=NALLAOMJmUoQ7kNvgEkEKW4&_nc_zt=23&_nc_ht=scontent.fuio1-1.fna&oh=03_Q7cD1QEkncbBz2OlqmaBjJMxQ7eep79MX-JgaemLGW9XjZGLkQ&oe=677ED080"
+                alt="Icono Rutinas"
+                class="w-8 h-8"
+              />
+              <h3 class="text-xl font-bold text-accent">{{ rutina_count }}</h3>
+            </div>
+            <p class="mt-2 text-gray-300">Rutinas</p>
+          </div>
+          <div class="bg-dark-secondary p-4 rounded shadow">
+            <div class="flex items-center justify-between">
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462566327_1281998786140199_2674171792626505868_n.png?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHW4_nDGxJ8ZmhWg4VsTtwfdX5AXt-svPZ1fkBe36y89nhZxVSo9vFmi7j0q2uOxseipQJFNqA58bE-XzCqVyVn&_nc_ohc=hfUw5NRmAMgQ7kNvgF2z_4v&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QG6fdFpIdNBYCxZA427GcpxOw3ngYD_lSGi1J_nXf8_UQ&oe=677EE2CB"
+                alt="Icono Ejercicios"
+                class="w-8 h-8"
+              />
+              <h3 class="text-xl font-bold text-accent">
+                {{ ejercicio_count }}
+              </h3>
+            </div>
+            <p class="mt-2 text-gray-300">Ejercicios</p>
+          </div>
+          <div class="bg-dark-secondary p-4 rounded shadow">
+            <div class="flex items-center justify-between">
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462575228_1344483843654930_8467205112234078370_n.png?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHfu4WH7Vo70NAgXBGEaVL4Wpmm7am8z61amabtqbzPrYHSuqqdoBk9QPAMgSzoCm-Dl3k14rQOXx_2-j_VNXuv&_nc_ohc=RGkKpzQLWC0Q7kNvgG5iC3y&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QElF2yh_TKTP0exU-1mPGJo_o6iV3s06ufN4rmXeGIBtA&oe=677EDB3F"
+                alt="Icono Planes"
+                class="w-8 h-8"
+              />
+              <h3 class="text-xl font-bold text-accent">{{ plan_count }}</h3>
+            </div>
+            <p class="mt-2 text-gray-300">Planes de Alimentación</p>
+          </div>
+          <div class="bg-dark-secondary p-4 rounded shadow">
+            <div class="flex items-center justify-between">
+              <img
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462541514_613142224571253_8619467218517172465_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGWcw_o4gbrz8cF5DgiwJcxQZSEfv812YFBlIR-_zXZgXQk8lSSaTvGY3763zeIIbLkda2jYR7MnD4M0UfSiNB0&_nc_ohc=0i50sSj3eDUQ7kNvgF8Be8_&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QEhEe1pF1Z24gAztnktv4y0W7ZF8pJBZALJWsyiw_qpFA&oe=677EB728"
+                alt="Icono Comidas"
+                class="w-8 h-8"
+              />
+              <h3 class="text-xl font-bold text-accent">{{ comida_count }}</h3>
+            </div>
+            <p class="mt-2 text-gray-300">Comidas</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

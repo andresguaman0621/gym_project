@@ -12,20 +12,20 @@
     <div class="bg-[#242426] p-8 rounded-lg shadow-lg max-w-md w-full">
       <div class="text-center mb-6">
         <img
-          src="https://shorturl.at/bgbC5"
+          src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.15752-9/462546084_1868004693728112_3877166154165198402_n.png?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFJPlczIa1f83OsPAm5UHBQQVRJwZaEt4NBVEnBloS3g_PCwZ7FZ8NTOb9SNfgXwApLH9alwh27zUD6R1x4tOsl&_nc_ohc=BChhet53_1UQ7kNvgGsdS04&_nc_zt=23&_nc_ht=scontent.fuio1-2.fna&oh=03_Q7cD1QHbYa30Dd1qJ-nT_eoVwfqimd3-wJtwjVID7TG5vi9b2Q&oe=677EE68D"
           alt="Logo"
           class="mx-auto mb-4 w-10 h-10"
         />
         <!-- Replace with actual logo -->
-        <h2 class="text-2xl font-bold text-white">Welcome back</h2>
-        <p class="text-gray-400">Please sign in to your account</p>
+        <h2 class="text-2xl font-bold text-white">Bienvenido</h2>
+        <p class="text-gray-400">Por favor, incia sesión con tu cuenta</p>
       </div>
 
       <form method="post" class="space-y-4">
         {% csrf_token %}
         <div>
           <label for="username" class="block text-sm font-medium text-gray-300"
-            >Username</label
+            >Nombre de usuario</label
           >
           <input
             type="text"
@@ -37,7 +37,7 @@
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-300"
-            >Password</label
+            >Contraseña</label
           >
           <input
             type="password"
@@ -53,25 +53,25 @@
               type="checkbox"
               class="form-checkbox h-4 w-4 text-[#3F9216]"
             />
-            <span class="ml-2">Remember me</span>
+            <span class="ml-2">Recuerdame</span>
           </label>
           <a href="#" class="text-sm text-[#3F9216] hover:underline"
-            >Forgot your password?</a
+            >¿Olvidaste tu contraseña?</a
           >
         </div>
         <button
           type="submit"
           class="w-full bg-[#3F9216] hover:bg-[#2f6f11] text-white font-bold py-2 rounded-lg transition duration-200"
         >
-          Sign in
+          Iniciar sesión
         </button>
       </form>
 
       <div class="text-center mt-4">
         <p class="text-gray-400">
-          Don't have an account?
+          ¿Aúnno tienes una cuenta?
           <a href="{% url 'register' %}" class="text-[#3F9216] hover:underline"
-            >Sign up</a
+            >Registrate</a
           >
         </p>
       </div>

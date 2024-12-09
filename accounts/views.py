@@ -69,7 +69,22 @@ def admin_dashboard(request):
     # Check if user has validated the secret key
     if not request.session.get('admin_key_validated'):
         return redirect('admin_secret_key')
-    return render(request, 'accounts/admin_dashboard.html')
+    
+    # Contar los registros
+    rutina_count = RutinaEntrenamiento.objects.count()
+    ejercicio_count = Ejercicio.objects.count()
+    plan_count = PlanAlimentacion.objects.count()
+    comida_count = Comida.objects.count()
+
+    # Pasar los datos al contexto
+    context = {
+        'rutina_count': rutina_count,
+        'ejercicio_count': ejercicio_count,
+        'plan_count': plan_count,
+        'comida_count': comida_count,
+    }
+
+    return render(request, 'accounts/admin_dashboard.html', context)
 
 def logout_view(request):
     request.session['admin_key_validated'] = False  # Clear the session variable

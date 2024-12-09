@@ -1,33 +1,91 @@
-<!-- templates/accounts/ejercicio_list.html -->
-{% extends "accounts/base.html" %} {% block content %}
-<h2>Ejercicios</h2>
-<a href="{% url 'create_ejercicio' %}">Create New Ejercicio</a>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Series</th>
-      <th>Repeticiones</th>
-      <th>Peso Recomendado</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ejercicio in ejercicios %}
-    <tr>
-      <td>{{ ejercicio.id }}</td>
-      <td>{{ ejercicio.nombre }}</td>
-      <td>{{ ejercicio.series }}</td>
-      <td>{{ ejercicio.repeticiones }}</td>
-      <td>{{ ejercicio.peso_recomendado }}</td>
-      <!-- Cambio realizado -->
-      <td>
-        <a href="{% url 'update_ejercicio' ejercicio.id %}">Edit</a> |
-        <a href="{% url 'delete_ejercicio' ejercicio.id %}">Delete</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Ejercicios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-accent {
+        background-color: #4b4b51; /* Verde personalizado para el fondo */
+      }
+      .bg-bt {
+        background-color: #3f9216;
+      }
+      .bg-dark-main {
+        background-color: #232325;
+      }
+      .bg-dark-secondary {
+        background-color: #242426;
+      }
+      .text-accent {
+        color: #3f9216;
+      }
+    </style>
+  </head>
+  <body class="bg-dark-main text-white min-h-screen">
+    <div class="container mx-auto p-4">
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Gestión de Ejercicios</h2>
+        <div>
+          <a
+            href="{% url 'create_ejercicio' %}"
+            class="bg-accent text-white px-4 py-2 rounded hover:bg-gray-700"
+          >
+            <span class="mr-2">+</span> Crear Nuevo Ejercicio
+          </a>
+          <a
+            href="{% url 'admin_dashboard' %}"
+            class="bg-bt text-white px-4 py-2 rounded hover:bg-green-700 ml-4"
+          >
+            ← Volver al Dashboard
+          </a>
+        </div>
+      </div>
+
+      <!-- Tabla de ejercicios -->
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-dark-secondary">
+            <th class="p-3 border-b border-gray-600">ID</th>
+            <th class="p-3 border-b border-gray-600">Nombre</th>
+            <th class="p-3 border-b border-gray-600">Series</th>
+            <th class="p-3 border-b border-gray-600">Repeticiones</th>
+            <th class="p-3 border-b border-gray-600">Peso Recomendado</th>
+            <th class="p-3 border-b border-gray-600">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ejercicio in ejercicios %}
+          <tr class="hover:bg-gray-700">
+            <td class="p-3 border-b border-gray-600">{{ ejercicio.id }}</td>
+            <td class="p-3 border-b border-gray-600">{{ ejercicio.nombre }}</td>
+            <td class="p-3 border-b border-gray-600">{{ ejercicio.series }}</td>
+            <td class="p-3 border-b border-gray-600">
+              {{ ejercicio.repeticiones }}
+            </td>
+            <td class="p-3 border-b border-gray-600">
+              {{ ejercicio.peso_recomendado }}
+            </td>
+            <td class="p-3 border-b border-gray-600 flex space-x-4">
+              <a
+                href="{% url 'update_ejercicio' ejercicio.id %}"
+                class="text-accent hover:underline flex items-center"
+              >
+                Editar
+              </a>
+              <a
+                href="{% url 'delete_ejercicio' ejercicio.id %}"
+                class="text-red-500 hover:underline flex items-center"
+              >
+                Eliminar
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
