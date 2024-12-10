@@ -1,6 +1,7 @@
 from .models import RutinaEntrenamiento, Ejercicio, PlanAlimentacion, Comida
 from datetime import timedelta
 from django.utils import timezone
+from django.db.models import Avg, Sum, Count
 
 
 def generar_rutina_personalizada(cliente_perfil):
@@ -92,9 +93,9 @@ def generar_dieta_personalizada(cliente_perfil):
 
     # Función auxiliar para distribuir comidas
     def asignar_comida(tipo_comida, cantidad_requerida):
-        """Asignar comidas según el tipo y cantidad requerida."""
+        # Asignar comidas según el tipo y cantidad requerida
         asignadas = []
-        disponibles = comidas.filter(tipo=tipo_comida).order_by('?')  # Selección aleatoria
+        disponibles = comidas.filter(tipo=tipo_comida).order_by('?') 
         for alimento in disponibles:
             if cantidad_requerida <= 0:
                 break
@@ -128,7 +129,6 @@ def generar_dieta_personalizada(cliente_perfil):
     return dieta
 
 
-
 def obtener_rutina(cliente_perfil):
     rutina = RutinaEntrenamiento.objects.filter(cliente=cliente_perfil.usuario).order_by('-fecha_inicio').first()
     if not rutina:
@@ -158,3 +158,48 @@ def obtener_dieta(cliente_perfil):
     ]
     
     return {'dieta': dieta, 'detalles': detalles}
+
+# ALGORTIMO DE REPORTE
+def calcular_medias_y_categorizar():
+    
+    rutinas = RutinaEntrenamiento.objects.prefetch_related('ejercicios').all()
+
+    
+    total_series = 0
+    total_repeticiones = 0
+    total_ejercicios = 0
+
+    # Recorrer las rutinas para calcular las sumas totales
+    for rutina in rutinas:
+        for ejercicio in rutina.ejercicios.all():
+            total_series += ejercicio.series
+            total_repeticiones += ejercicio.repeticiones
+            total_ejercicios += 1
+
+    # Calcular las medias aritméticas
+    media_series = total_series / total_ejercicios if total_ejercicios > 0 else 0
+    media_repeticiones = total_repeticiones / total_ejercicios if total_ejercicios > 0 else 0
+
+    # Categorizar usuarios que superan las medias
+    usuarios_sobresalientes = []
+
+    # Sumas totales
+    for rutina in rutinas:
+        usuario = rutina.cliente
+        suma_series_usuario = sum(e.series for e in rutina.ejercicios.all())
+        suma_repeticiones_usuario = sum(e.repeticiones for e in rutina.ejercicios.all())
+
+        if suma_series_usuario > media_series and suma_repeticiones_usuario > media_repeticiones:
+            usuarios_sobresalientes.append({
+                'usuario': usuario.username,
+                'series': suma_series_usuario,
+                'repeticiones': suma_repeticiones_usuario,
+            })
+
+    return {
+        'media_series': media_series,
+        'media_repeticiones': media_repeticiones,
+        'usuarios_sobresalientes': usuarios_sobresalientes
+    }
+
+

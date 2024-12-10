@@ -12,8 +12,9 @@ from .models import Ejercicio, PlanAlimentacion, Comida
 from .forms import EjercicioForm, PlanAlimentacionForm, ComidaForm
 from .forms import ClientePerfilForm
 from .utils import generar_rutina_personalizada, generar_dieta_personalizada, obtener_rutina, obtener_dieta
-from .models import ClientePerfil  # Agrega esta línea
+from .models import ClientePerfil  
 from .decorators import superadmin_required
+from .utils import calcular_medias_y_categorizar
 
 
 def register_view(request):
@@ -63,25 +64,53 @@ def admin_secret_key(request):
         form = SecretKeyForm()
     return render(request, 'accounts/admin_secret_key.html', {'form': form})
 
+# @login_required
+# @superadmin_required
+# def admin_dashboard(request):
+#     # Check if user has validated the secret key
+#     if not request.session.get('admin_key_validated'):
+#         return redirect('admin_secret_key')
+    
+#     # Contar los registros
+#     rutina_count = RutinaEntrenamiento.objects.count()
+#     ejercicio_count = Ejercicio.objects.count()
+#     plan_count = PlanAlimentacion.objects.count()
+#     comida_count = Comida.objects.count()
+
+#     # Pasar los datos al contexto
+#     context = {
+#         'rutina_count': rutina_count,
+#         'ejercicio_count': ejercicio_count,
+#         'plan_count': plan_count,
+#         'comida_count': comida_count,
+#     }
+
+#     return render(request, 'accounts/admin_dashboard.html', context)
+
 @login_required
 @superadmin_required
 def admin_dashboard(request):
-    # Check if user has validated the secret key
+    # Validar la clave del administrador
     if not request.session.get('admin_key_validated'):
         return redirect('admin_secret_key')
-    
-    # Contar los registros
+
+    # Contar registros básicos
     rutina_count = RutinaEntrenamiento.objects.count()
     ejercicio_count = Ejercicio.objects.count()
     plan_count = PlanAlimentacion.objects.count()
     comida_count = Comida.objects.count()
 
-    # Pasar los datos al contexto
+    # Obtener el análisis de medias y usuarios destacados
+    resultados = calcular_medias_y_categorizar()
+
     context = {
         'rutina_count': rutina_count,
         'ejercicio_count': ejercicio_count,
         'plan_count': plan_count,
         'comida_count': comida_count,
+        'media_series': resultados['media_series'],
+        'media_repeticiones': resultados['media_repeticiones'],
+        'usuarios_sobresalientes': resultados['usuarios_sobresalientes'],
     }
 
     return render(request, 'accounts/admin_dashboard.html', context)
@@ -115,6 +144,8 @@ def create_ejercicio(request):
         form = EjercicioForm()
     return render(request, 'accounts/ejercicio_form.html', {'form': form})
 
+@login_required
+@superadmin_required
 def create_planalimentacion(request):
     if request.method == 'POST':
         form = PlanAlimentacionForm(request.POST)
@@ -125,6 +156,8 @@ def create_planalimentacion(request):
         form = PlanAlimentacionForm()
     return render(request, 'accounts/planalimentacion_form.html', {'form': form})
 
+@login_required
+@superadmin_required
 def create_comida(request):
     if request.method == 'POST':
         form = ComidaForm(request.POST)
@@ -139,14 +172,19 @@ def create_comida(request):
 #demas metodos
 # List views
 @login_required
+@superadmin_required
 def rutina_list(request):
     rutinas = RutinaEntrenamiento.objects.all()
     return render(request, 'accounts/rutina_list.html', {'rutinas': rutinas})
 
+@login_required
+@superadmin_required
 def ejercicio_list(request):
     ejercicios = Ejercicio.objects.all()
     return render(request, 'accounts/ejercicio_list.html', {'ejercicios': ejercicios})
 
+@login_required
+@superadmin_required
 def planalimentacion_list(request):
     planes = PlanAlimentacion.objects.all()
     return render(request, 'accounts/planalimentacion_list.html', {'planes': planes})

@@ -145,6 +145,32 @@
           </div>
         </div>
       </div>
+      <!-- REPORTE Y CATEGORIZACION -->
+      <div class="bg-dark-secondary p-6 rounded shadow mt-6">
+        <h3 class="text-2xl font-bold text-accent">Reporte de Rutinas</h3>
+        <p class="text-gray-300 mt-2">
+          Media de Series:
+          <span class="text-white font-bold">{{ media_series }}</span>
+        </p>
+        <p class="text-gray-300">
+          Media de Repeticiones:
+          <span class="text-white font-bold">{{ media_repeticiones }}</span>
+        </p>
+
+        <h4 class="text-xl font-bold mt-4 text-accent">
+          Usuarios Sobresalientes
+        </h4>
+        <ul class="mt-2">
+          {% for usuario in usuarios_sobresalientes %}
+          <li class="text-gray-300">
+            <strong>{{ usuario.usuario }}</strong>: Series: {{usuario.series}},
+            Repeticiones: {{usuario.repeticiones}}
+          </li>
+          {% empty %}
+          <li class="text-gray-300">No hay usuarios destacados.</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </body>
 </html>
