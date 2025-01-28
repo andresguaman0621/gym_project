@@ -11,3 +11,5 @@ def superadmin_required(view_func):
             return redirect('login')  # Redirige al login si no es superadmin
         return view_func(request, *args, **kwargs)
     return _wrapped_view
+
+

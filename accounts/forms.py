@@ -112,6 +112,24 @@ class ComidaForm(forms.ModelForm):
     class Meta:
         model = Comida
         fields = ['tipo', 'hora', 'nombre', 'cantidad', 'unidad']
+        
+class FormularioFactory:
+    """
+    Factory Method para crear formularios de modelos.
+    """
+
+    @staticmethod
+    def crear_formulario(tipo):
+        if tipo == "rutina":
+            return RutinaEntrenamientoForm
+        elif tipo == "ejercicio":
+            return EjercicioForm
+        elif tipo == "plan_alimentacion":
+            return PlanAlimentacionForm
+        elif tipo == "comida":
+            return ComidaForm
+        else:
+            raise ValueError(f"Tipo de formulario '{tipo}' no es válido")
 
 
 # class ClientePerfilForm(forms.ModelForm):

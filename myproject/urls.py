@@ -72,4 +72,7 @@ urlpatterns = [
     path('dashboard/', views.client_dashboard, name='client_dashboard'),
     path('perfil/actualizar/', views.actualizar_perfil, name='actualizar_perfil'),
     # path('registro/', views.registro_cliente, name='registro_cliente'),
+    
+    #Ruta generica factory
+    path('crear/<str:tipo>/', views.create_model, name='create_model'),
 ]

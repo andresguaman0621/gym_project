@@ -15,7 +15,33 @@ from .utils import generar_rutina_personalizada, generar_dieta_personalizada, ob
 from .models import ClientePerfil  
 from .decorators import superadmin_required
 from .utils import calcular_medias_y_categorizar
+from .forms import FormularioFactory
 
+@login_required
+@superadmin_required
+def create_model(request, tipo):
+    """
+    Vista genérica para crear un modelo basado en el tipo proporcionado.
+    """
+    try:
+        formulario_clase = FormularioFactory.crear_formulario(tipo)  # Obtiene el formulario correcto
+    except ValueError as e:
+        return render(request, 'accounts/error.html', {'error': str(e)})
+
+    if request.method == 'POST':
+        form = formulario_clase(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(f'{tipo}_list')  # Redirige a la lista correspondiente
+    else:
+        form = formulario_clase()
+
+    # return render(request, f'accounts/{tipo}_form.html', {'form': form})
+    return render(request, 'accounts/form_template.html', {
+        'form': form, 
+        'tipo': tipo, 
+        'lista_url': f"{tipo}_list"  # 🔥 Aquí se define la URL de la lista
+    })
 
 def register_view(request):
     if request.method == 'POST':
@@ -130,7 +156,8 @@ def create_rutina(request):
             return redirect('rutina_list')
     else:
         form = RutinaEntrenamientoForm()
-    return render(request, 'accounts/rutina_form.html', {'form': form})
+    # return render(request, 'accounts/rutina_form.html', {'form': form})
+    return render(request, 'accounts/rutina_form.html', {'form': form, 'tipo': 'rutina'})  # ✅ Agregar 'tipo'
 
 @login_required
 @superadmin_required 
@@ -208,7 +235,8 @@ def update_rutina(request, pk):
             return redirect('rutina_list')
     else:
         form = RutinaEntrenamientoForm(instance=rutina)
-    return render(request, 'accounts/rutina_form.html', {'form': form})
+    # return render(request, 'accounts/rutina_form.html', {'form': form})
+    return render(request, 'accounts/rutina_form.html', {'form': form, 'tipo': 'rutina'})  # ✅ Ahora sí se pasa 'tipo'
 
 @login_required
 @superadmin_required 
