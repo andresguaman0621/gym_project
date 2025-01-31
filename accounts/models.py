@@ -94,3 +94,12 @@ def crear_perfil_cliente(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def guardar_perfil_cliente(sender, instance, **kwargs):
     instance.perfil.save()  # Asegura que el perfil se guarde al guardar el usuario
+    
+# NUEVO MODELO MENSAJES
+class Mensaje(models.Model):
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    mensaje = models.TextField()
+    fecha_envio = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Mensaje de {self.cliente.username} en {self.fecha_envio}"

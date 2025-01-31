@@ -15,12 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import router
 from django.urls import path, include
 from accounts import views as account_views
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from accounts import views
 from django.shortcuts import redirect
+from rest_framework.routers import DefaultRouter
+from accounts.api import MensajeViewSet
+
+router = DefaultRouter()
+router.register(r'mensajes', MensajeViewSet)
 
 urlpatterns = [
     path('', lambda request: redirect('login')),  # Redirige la raíz a login/
@@ -75,4 +81,8 @@ urlpatterns = [
     
     #Ruta generica factory
     path('crear/<str:tipo>/', views.create_model, name='create_model'),
+    
+    # Ruta para mensajes (NUEVO)
+    path('api/', include(router.urls)),
+    path('api/user/', views.get_user_info, name='get_user_info'),
 ]

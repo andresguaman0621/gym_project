@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -16,6 +17,7 @@ from .models import ClientePerfil
 from .decorators import superadmin_required
 from .utils import calcular_medias_y_categorizar
 from .forms import FormularioFactory
+from .models import Mensaje
 
 @login_required
 @superadmin_required
@@ -90,43 +92,50 @@ def admin_secret_key(request):
         form = SecretKeyForm()
     return render(request, 'accounts/admin_secret_key.html', {'form': form})
 
+
 # @login_required
 # @superadmin_required
 # def admin_dashboard(request):
-#     # Check if user has validated the secret key
+#     # Validar la clave del administrador
 #     if not request.session.get('admin_key_validated'):
 #         return redirect('admin_secret_key')
-    
-#     # Contar los registros
+
+#     # Contar registros básicos
 #     rutina_count = RutinaEntrenamiento.objects.count()
 #     ejercicio_count = Ejercicio.objects.count()
 #     plan_count = PlanAlimentacion.objects.count()
 #     comida_count = Comida.objects.count()
 
-#     # Pasar los datos al contexto
+#     # Obtener el análisis de medias y usuarios destacados
+#     resultados = calcular_medias_y_categorizar()
+
 #     context = {
 #         'rutina_count': rutina_count,
 #         'ejercicio_count': ejercicio_count,
 #         'plan_count': plan_count,
 #         'comida_count': comida_count,
+#         'media_series': resultados['media_series'],
+#         'media_repeticiones': resultados['media_repeticiones'],
+#         'usuarios_sobresalientes': resultados['usuarios_sobresalientes'],
 #     }
 
 #     return render(request, 'accounts/admin_dashboard.html', context)
-
 @login_required
 @superadmin_required
 def admin_dashboard(request):
-    # Validar la clave del administrador
     if not request.session.get('admin_key_validated'):
         return redirect('admin_secret_key')
 
-    # Contar registros básicos
+    # Datos básicos
     rutina_count = RutinaEntrenamiento.objects.count()
     ejercicio_count = Ejercicio.objects.count()
     plan_count = PlanAlimentacion.objects.count()
     comida_count = Comida.objects.count()
 
-    # Obtener el análisis de medias y usuarios destacados
+    # Obtener los mensajes
+    mensajes = Mensaje.objects.all().order_by('-fecha_envio')
+
+    # Contar mensajes
     resultados = calcular_medias_y_categorizar()
 
     context = {
@@ -134,6 +143,7 @@ def admin_dashboard(request):
         'ejercicio_count': ejercicio_count,
         'plan_count': plan_count,
         'comida_count': comida_count,
+        'mensajes': mensajes,
         'media_series': resultados['media_series'],
         'media_repeticiones': resultados['media_repeticiones'],
         'usuarios_sobresalientes': resultados['usuarios_sobresalientes'],
@@ -338,3 +348,11 @@ def actualizar_perfil(request):
     return render(request, 'accounts/actualizar_perfil.html', {'form': form})
 
 
+@login_required
+def get_user_info(request):
+    user = request.user
+    return JsonResponse({
+        'id': user.id,
+        'username': user.username,
+        'email': user.email,
+    })

@@ -171,6 +171,20 @@
           {% endfor %}
         </ul>
       </div>
+      <!-- SECCION MENSAJES -->
+      <div class="bg-dark-secondary p-6 rounded shadow mt-6">
+        <h3 class="text-2xl font-bold text-accent">Mensajes de Clientes</h3>
+        <ul class="mt-2">
+          {% for mensaje in mensajes %}
+          <li class="text-gray-300 mb-2">
+            <strong>{{ mensaje.cliente.username }}</strong>: {{mensaje.mensaje}}
+            ({{ mensaje.fecha_envio }})
+          </li>
+          {% empty %}
+          <li class="text-gray-300">No hay mensajes.</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </body>
 </html>

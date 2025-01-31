@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard de Cliente</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
   </head>
   <body
     class="bg-[#232325] text-[#FFFFFF] min-h-screen flex items-center justify-center"
@@ -152,7 +153,14 @@
           <p class="text-sm text-[#FFFFFF]">No tienes una dieta asignada.</p>
           {% endif %}
         </div>
+
+        <!-- React Chat Component -->
+        <div id="root"></div>
+        <!-- Este div es donde React montará el chat -->
       </div>
     </div>
+
+    <!-- Este es el archivo JS compilado por React -->
+    <script src="{% static 'build/static/js/main.f69a136b.js' %}"></script>
   </body>
 </html>
